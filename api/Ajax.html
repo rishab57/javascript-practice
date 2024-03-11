@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajax</h1>
+    <p>
+        0 : usend ->client has been created.open() not call <br>
+        1 : opened ->open has called. <br>
+        2 : header_Received ->send() has been called, and headers and ststus are available. <br>
+        3 : loading downloading -> responseText holds partial data. <br>
+        4 : done ->the operation is competed. <br>
+    </p>
+    
+    <script>
+        const requestUrl = 'https://api.github.com/users/rishab57';
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', requestUrl);
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4){
+                const data = JSON.parse(this.responseText); // Changed from this.requestText to this.responseText
+                console.log(typeof data);
+                console.log(data.followers);
+            }       
+        };
+        xhr.send();
+
+    </script>
+</body>
+</html>
